@@ -1,10 +1,16 @@
-ex1     load, explore, display image
-ex2     manipulate image pixels
-ex3     image transformations
-ex4     addition operation
-ex5     filtering operation
-ex6     binarization
-ex7     edge detection operation
-ex8     gray scale and RGB histogram
-ex9     kNN Bayes classifier
-ex10    hierarchical clustering
+ex1     Background Color using scroll bar 
+ex2     student name using grid layout
+ex3     Positioning the picture using mouse event
+            |
+            |-->  picture.jpg
+ex4     Bouncing Ball 
+ex5     Listing pg degree using radio button
+ex6     Student marksheet 
+ex7     Handling Mouse events
+ex8     connection to access database
+ex9     to fetch the table information
+ex10    update a particular record in the table
+ex11    insert a particular record in the table
+ex12    delete a particular record in the table
+ex13    find record in a specific column
+ex14    adding column in a existung table

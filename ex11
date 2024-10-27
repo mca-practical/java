@@ -1,5 +1,5 @@
 import java.sql.*;
-class connection
+class RecInsert
 {
 	public static void main(String arg[])
 	{
@@ -8,7 +8,8 @@ class connection
 		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 		Connection cn=DriverManager.getConnection("jdbc:odbc:abcd");
 		Statement st=cn.createStatement();
+		ResultSet rs=st.executeQuery("INSERT INTO student(sid, sname, dep) VALUES (4, 'Harish', 'Physics')");
 		}catch(Exception e1){}
-		System.out.println("Connection Successfully Completed");
+		System.out.println("Records Successfully Inserted");
 	}
 }

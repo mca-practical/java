@@ -1,5 +1,5 @@
 import java.sql.*;
-class RecView
+class RecFind
 {
 	public static void main(String arg[])
 	{
@@ -7,15 +7,21 @@ class RecView
 		{
 		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 		Connection cn=DriverManager.getConnection("jdbc:odbc:abcd");
-		Statement st=cn.createStatement();
-		ResultSet rs=st.executeQuery("select *from student");
+		Statement st=cn.createStatement();           	
+            
+            	ResultSet rs=st.executeQuery("SELECT sname,dep FROM student WHERE sid=4");
 			while(rs.next())
 			{
 			System.out.println(rs.getString(1));
 			System.out.println(rs.getString(2));
 			System.out.println(rs.getString(3));
 			}
+
+
+
 		}catch(Exception e1){}
-		System.out.println("Fetch the records Successfully");
+		System.out.println("Record Successfully fetched");
+		
+
 	}
 }

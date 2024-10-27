@@ -1,64 +1,66 @@
-# %%
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
- 
-image_path =("tensor.jpg")
-image = cv2.imread(image_path)
-image_original=cv2.imread(image_path)
-cv2.imshow("image",image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+import javax.swing.*; 
+import java.awt.*; 
+import java.awt.event.*; 
+import java.awt.image.*; 
+import javax.imageio.*; 
+import java.io.*; 
 
-scaled_image = cv2.resize(image, (200, 200))
- 
-cv2.imshow("image",scaled_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
- 
-(h, w) = image.shape[:2]
-center = (w // 2, h // 2)
-M = cv2.getRotationMatrix2D(center, 45, 1.0) 
-rotated_image = cv2.warpAffine(image, M, (w, h))
-cv2.imshow("image",rotated_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+public class Picture extends JPanel implements MouseListener { 
+    private int x, y; 
+    private Image img; 
 
-M = np.float32([[1, 0, 50], [0, 1, 100]])   
+    public Picture() { 
+        super(); 
+        addMouseListener(this); 
+        try {
+            img = ImageIO.read(new File("picture.jpg")); // Load image with error handling
+        } catch (IOException e) {
+            e.printStackTrace();
+            img = null; // Handle case where image can't be loaded
+        }
+    } 
 
-translated_image = cv2.warpAffine(image, M, (w, h))
-cv2.imshow("image",translated_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    @Override 
+    protected void paintComponent(Graphics g) { 
+        super.paintComponent(g); 
+        g.drawString("x-axis=" + x + ", y-axis=" + y, x, y); 
+        if (img != null) {
+            g.drawImage(img, x, y, this); // Ensure img is loaded before drawing
+        }
+    } 
 
-flipped_image = cv2.flip(image, 1) 
-cv2.imshow("image",flipped_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
- 
-cropped_image = image[50:200, 50:200]
-cv2.imshow("image",cropped_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    @Override 
+    public void mouseClicked(MouseEvent me) { 
+        x = me.getX(); 
+        y = me.getY(); 
+        repaint(); 
+    } 
 
-bright_image = cv2.convertScaleAbs(image, alpha=1.0, beta=50)
+    // Unused MouseListener methods 
+    @Override 
+    public void mouseEntered(MouseEvent me) {} 
+    @Override 
+    public void mouseExited(MouseEvent me) {} 
+    @Override 
+    public void mousePressed(MouseEvent me) {} 
+    @Override 
+    public void mouseReleased(MouseEvent me) {} 
 
-cv2.imshow("image",bright_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
- 
-contrast_image = cv2.convertScaleAbs(image, alpha=2.0, beta=0) 
+    public static void main(String[] args) { 
+        SwingUtilities.invokeLater(new Runnable() { 
+            public void run() { 
+                createAndShowGUI(); 
+            } 
+        }); 
+    } 
 
-cv2.imshow("image",contrast_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-cv2.imshow("image",gray_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
- 
-equalized_image = cv2.equalizeHist(gray_image)
-cv2.imshow("image",equalized_image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    private static void createAndShowGUI() { 
+        JFrame frame = new JFrame("Picture App"); 
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        Picture panel = new Picture(); 
+        frame.add(panel); 
+        frame.setSize(600, 600); 
+        frame.setLocationRelativeTo(null); // Center the frame on the screen
+        frame.setVisible(true); 
+    } 
+}

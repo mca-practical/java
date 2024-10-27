@@ -1,5 +1,5 @@
 import java.sql.*;
-class connection
+class RecDel
 {
 	public static void main(String arg[])
 	{
@@ -8,7 +8,8 @@ class connection
 		Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
 		Connection cn=DriverManager.getConnection("jdbc:odbc:abcd");
 		Statement st=cn.createStatement();
+		ResultSet rs=st.executeQuery("delete student where sid=2");
 		}catch(Exception e1){}
-		System.out.println("Connection Successfully Completed");
+		System.out.println("Record Successfully Deleted");
 	}
 }
