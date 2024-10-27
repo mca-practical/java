@@ -1,0 +1,29 @@
+# %%
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+ 
+image_path =("tensor.jpg")
+image = cv2.imread(image_path)
+image = cv2.resize(image, (700, 500))
+cv2.imshow("image",image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# %%
+image2 = cv2.imread("tensor1.jpg")
+image2 = cv2.resize(image2, (700, 500))
+cv2.imshow("image",image2)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+image_1 = image
+image_2=image2
+ 
+if image_1.shape != image_2.shape:
+    raise ValueError("Images must have the same dimensions and number of channels.")
+
+added_image = np.clip(image_1 + image_2, 0, 255).astype(np.uint8)
+cv2.imshow("image",added_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

@@ -1,0 +1,21 @@
+# %%
+import cv2
+import os
+
+# %%
+image_path=r"tensor.jpg"
+image=cv2.imread(image_path)
+
+# %%
+height, width, channels = image.shape
+image_size = image.size
+image_dtype=image.dtype
+
+print(f'Image dimensions: {width}x{height}')
+print(f'Number of channels: {channels}')
+print(f'Image size (in bytes): {image_size}')
+print(f'Image data type: {image_dtype}')
+
+cv2.imshow('Image', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows

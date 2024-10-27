@@ -1,0 +1,32 @@
+# %%
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
+from scipy.cluster.hierarchy import dendrogram,linkage
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.metrics import classification_report,accuracy_score
+
+iris=load_iris()
+X=iris.data
+y=iris.target
+
+scaler=StandardScaler()
+X_scaled=scaler.fit_transform(X)
+
+Z=linkage(X_scaled,method='ward')
+
+plt.figure(figsize=(10,7))
+dendrogram(Z,labels=iris.target_names[y])
+plt.title('Hierarchical Clustering Dendrogram')
+plt.xlabel('Sample index')
+plt.ylabel('Distance')
+plt.show()
+
+# %%
+agg_clustering = AgglomerativeClustering(n_clusters=3, linkage='ward')
+y_pred = agg_clustering.fit_predict(X_scaled)
+
+print("Accuracy:",accuracy_score(y,y_pred))
+print(classification_report(y,y_pred,target_names=iris.target_names))

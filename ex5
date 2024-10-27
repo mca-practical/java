@@ -1,0 +1,72 @@
+# %%
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+image_path=("image.jpg")
+image=cv2.imread(image_path)
+image2=image
+cv2.imshow("image",image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+filter=np.array([[1,0,0],
+                [0,1,0],
+                [0,0,1]])
+
+identity_filter=cv2.filter2D(src=image, ddepth=-1, kernel=filter)
+print("Original image")
+cv2.imshow("image",image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+print("After applying filter / kernel")
+cv2.imshow("image",identity_filter)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+filter2=np.ones((5,5),np.float32)/25
+img=cv2.filter2D(src=image, ddepth=-1, kernel=filter2)
+print("Original image")
+
+cv2.imshow("image",image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+print("After applying blur filter / kernel")
+
+cv2.imshow("image",img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# %%
+blur=cv2.bilateralFilter(image,9,500,500)
+cv2.imshow("image",blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# %%
+img_1=cv2.boxFilter(img,0,(7,7),img,(-1,-1),False,
+                   cv2.BORDER_DEFAULT)
+cv2.imshow("image",blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# %%
+retval,threshold=cv2.threshold(image2,62,255,cv2.THRESH_BINARY)
+cv2.imshow("image",threshold)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# %%
+filter_emb=np.array([[1,0,0],
+                [0,1,0],
+                [0,0,1]])
+emb=cv2.filter2D(src=image, ddepth=-1, kernel=filter_emb)
+print("Original image")
+cv2.imshow("image",image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+print("After applying filter / kernel")
+cv2.imshow("image",emb)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

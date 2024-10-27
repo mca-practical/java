@@ -1,0 +1,64 @@
+# %%
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+ 
+image_path =("tensor.jpg")
+image = cv2.imread(image_path)
+image_original=cv2.imread(image_path)
+cv2.imshow("image",image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+scaled_image = cv2.resize(image, (200, 200))
+ 
+cv2.imshow("image",scaled_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+ 
+(h, w) = image.shape[:2]
+center = (w // 2, h // 2)
+M = cv2.getRotationMatrix2D(center, 45, 1.0) 
+rotated_image = cv2.warpAffine(image, M, (w, h))
+cv2.imshow("image",rotated_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+M = np.float32([[1, 0, 50], [0, 1, 100]])   
+
+translated_image = cv2.warpAffine(image, M, (w, h))
+cv2.imshow("image",translated_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+flipped_image = cv2.flip(image, 1) 
+cv2.imshow("image",flipped_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+ 
+cropped_image = image[50:200, 50:200]
+cv2.imshow("image",cropped_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+bright_image = cv2.convertScaleAbs(image, alpha=1.0, beta=50)
+
+cv2.imshow("image",bright_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+ 
+contrast_image = cv2.convertScaleAbs(image, alpha=2.0, beta=0) 
+
+cv2.imshow("image",contrast_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+cv2.imshow("image",gray_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+ 
+equalized_image = cv2.equalizeHist(gray_image)
+cv2.imshow("image",equalized_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

@@ -1,0 +1,30 @@
+# %%
+import cv2
+image_path=r"tensor.jpg"
+image=cv2.imread(image_path)
+image_original=cv2.imread(image_path)
+cv2.imshow('Image', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# %%
+image_roi=image
+roi_start_x, roi_start_y=50, 50
+roi_end_x, roi_end_y=300,300
+image_roi[roi_start_y:roi_end_y,roi_start_x:roi_end_x]=[0,0,0]
+print("Original image :-")
+cv2.imshow("Image:-",image_original)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+print('converting a region of the image to black')
+cv2.imshow("Image:-",image_roi)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+# %%
+mask=cv2.inRange(image_original, (250,250,250), (255,255,255))
+masked_image=cv2.bitwise_and(image_original, image_original, mask=mask)
+print('Applied a mask to highlight dark region.')
+cv2.imshow("Image:-",masked_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()

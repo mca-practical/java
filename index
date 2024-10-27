@@ -1,0 +1,10 @@
+ex1     load, explore, display image
+ex2     manipulate image pixels
+ex3     image transformations
+ex4     addition operation
+ex5     filtering operation
+ex6     binarization
+ex7     edge detection operation
+ex8     gray scale and RGB histogram
+ex9     kNN Bayes classifier
+ex10    hierarchical clustering
